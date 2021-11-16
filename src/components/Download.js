@@ -78,7 +78,9 @@ const Download = () => {
     <div className="download-page">
       <div className="download-page-container">
         <div className="main-card-container">
-          <div className="card-header"></div>
+          <div className="card-header">
+            <p className="card-heading">Your File Details</p>
+          </div>
           <div className="card-body">
             <div className="file-details-container">
               <div className="file-details">
@@ -112,6 +114,20 @@ const Download = () => {
                     <p>{fileData?.fileType}</p>
                   </div>
                 </div>
+                {fileData.senderName ? (
+                  <div className="file-items">
+                    <div>
+                      <p>
+                        <b>File uploaded by:</b>
+                      </p>
+                    </div>
+                    <div className="additional">
+                      <p>{fileData?.senderName}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="preview-container"></div>
