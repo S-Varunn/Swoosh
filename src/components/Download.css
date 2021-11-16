@@ -1,0 +1,76 @@
+body {
+  box-sizing: border-box;
+}
+.download-page {
+  display: flex;
+}
+.download-page-container {
+  margin: 0;
+  padding: 0;
+}
+.download-page-container .main-card-container {
+  height: 56vh;
+  width: 29vw;
+  background-color: #ffd68a;
+  box-shadow: 10px 14px 18px 10px rgb(0 0 0 / 20%);
+  border-radius: 35px;
+}
+.download-page-container .main-card-container .card-header {
+  height: 20%;
+  width: 100%;
+}
+.card-title {
+  text-align: center;
+  padding: 10px;
+  color: #004992;
+  font-family: "Caveat", cursive;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+.download-page-container .main-card-container .card-body {
+  height: 60%;
+  width: 100%;
+  display: flex;
+}
+.download-page-container
+  .main-card-container
+  .card-body
+  .file-details-container {
+  height: 100%;
+  width: 75%;
+}
+.download-page-container
+  .main-card-container
+  .card-body
+  .file-details-container
+  .file-details {
+  width: 100%;
+  height: 100%;
+  margin-top: 60px;
+}
+.download-page-container
+  .main-card-container
+  .card-body
+  .file-details-container
+  .file-details
+  .file-items {
+  display: flex;
+  margin-left: 35px;
+  padding: 5px;
+}
+.additional {
+  margin-left: 4px;
+}
+.download-page-container .main-card-container .card-body .preview-container {
+  height: 100%;
+  width: 25%;
+}
+.download-page-container .main-card-container .card-footer {
+  height: 20%;
+  width: 100%;
+}
+
+.download-area {
+  height: 20vw;
+  width: 39vw;
+}

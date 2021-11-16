@@ -1,0 +1,150 @@
+.minion {
+  position: absolute;
+  top: calc(48% - (250px / 2));
+  left: calc(50% - (140px / 2));
+  width: 140px;
+}
+.minion * {
+  position: absolute;
+}
+.minion .goggle-strap {
+  top: 68px;
+  height: 3px;
+  background: black;
+  width: 16px;
+  z-index: 6;
+}
+.minion .goggle-strap.left {
+  left: -2px;
+}
+.minion .goggle-strap.left:before,
+.minion .goggle-strap.left:after {
+  border-right: 16px solid #444444;
+}
+.minion .goggle-strap.right {
+  right: -2px;
+}
+.minion .goggle-strap.right:before,
+.minion .goggle-strap.right:after {
+  border-left: 16px solid #444444;
+}
+.minion .goggle-strap:before,
+.minion .goggle-strap:after {
+  height: 6px;
+}
+.minion .goggle-strap:before {
+  top: -7px;
+  border-top: 2px solid transparent;
+}
+.minion .goggle-strap:after {
+  top: 3px;
+  border-bottom: 2px solid transparent;
+}
+.minion .goggle-strap-link {
+  top: 58px;
+  height: 25px;
+  width: 5px;
+  background: #999999;
+  z-index: 7;
+}
+.minion .goggle-strap-link.left {
+  left: 12px;
+}
+.minion .goggle-strap-link.right {
+  right: 12px;
+}
+.minion .goggle-frame {
+  top: 40px;
+  height: 50px;
+  width: 50px;
+  border: 5px solid #cccccc;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 8;
+}
+.minion .goggle-frame.left {
+  left: 30%;
+  margin-left: -30px;
+}
+.minion .goggle-frame.left .goggle {
+  left: -1px;
+}
+.minion .goggle-frame.right {
+  right: 30%;
+  margin-right: -30px;
+}
+.minion .goggle-frame.right .goggle {
+  right: -1px;
+}
+.minion .goggle-frame .goggle {
+  height: 50px;
+  width: 50px;
+  border: 3px solid #666666;
+  border-radius: 50%;
+}
+.minion .goggle-frame .goggle {
+  display: flex;
+}
+.minion .goggle-frame .goggle .eye {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 45px rgba(0, 0, 0, 0.2), inset 0 0 15px rgb(189, 189, 189),
+    inset 0 0 15px rgb(134, 134, 134);
+}
+.minion .goggle-frame .goggle .eye::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #000;
+  border: 10px solid #ac7440;
+  box-sizing: border-box;
+}
+.minion .mouth {
+  top: 110px;
+  left: 50%;
+  margin-left: -30px;
+  height: 20px;
+  width: 60px;
+  border-bottom: 2px solid #de9a33;
+  border-right: 1px solid tranparent;
+  border-left: 1px solid tranparent;
+  border-radius: 70%;
+  z-index: 5;
+  box-shadow: inset 0 -1px 2px -1px rgba(0, 0, 0, 0.3);
+}
+.minion .goggle-shadow {
+  height: 75px;
+  top: 45px;
+  border-radius: 50%;
+  background-image: radial-gradient(
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+  z-index: 5;
+}
+.dropbox {
+  height: 200px;
+}
+p {
+  font-family: "Zen Loop", cursive;
+  font-size: 25px;
+  text-align: center;
+}
+.filename {
+  height: 20px;
+  width: 500px;
+  text-decoration: none;
+  text-align: center;
+}
+li {
+  list-style: none;
+}
