@@ -19,6 +19,12 @@ body {
   height: 20%;
   width: 100%;
 }
+.download-page-container .main-card-container .card-header .card-heading {
+  font-family: "Caveat", cursive;
+  padding: 10px;
+  font-weight: bolder;
+  font-size: 33px;
+}
 .card-title {
   text-align: center;
   padding: 10px;
