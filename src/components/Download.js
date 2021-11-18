@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { initObject } from "../initVar";
 import "../components/Download.css";
+import wordImg from "./assets/wordImg.png";
+import pptImg from "./assets/pptImg.png";
+import pdfImg from "./assets/pdfImg.jpeg";
+import otherFilesImg from "./assets/otherFilesImg.png";
+
 const Download = () => {
   const [fileData, setFileData] = useState({});
   const [file, setFile] = useState({});
@@ -130,9 +135,7 @@ const Download = () => {
                 )}
               </div>
             </div>
-            <div className="preview-container"></div>
           </div>
-          <div className="card-footer"></div>
         </div>
       </div>
       <div className="download-area"></div>
