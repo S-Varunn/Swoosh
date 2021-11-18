@@ -9,7 +9,8 @@ const Download = () => {
   const [dispFileName, setDispFileName] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
 
-  let id = window.location.href.substr(40);
+  var baseUrl = window.location.href;
+  var id = baseUrl.substring(baseUrl.lastIndexOf("=") + 1);
 
   useEffect(() => {
     try {
@@ -132,10 +133,17 @@ const Download = () => {
             </div>
             <div className="preview-container"></div>
           </div>
-          <div className="card-footer"></div>
         </div>
       </div>
-      <div className="download-area"></div>
+      <div className="download-area">
+        <div className="download-header">
+          <p>Your file is ready to download... Kampai!</p>
+        </div>
+        <div className="download-avail"></div>
+        <div className="download-button">
+          <button className="mybtn">Download</button>
+        </div>
+      </div>
     </div>
   );
 };
