@@ -7,7 +7,10 @@ import "react-datepicker/dist/react-datepicker.css";
 const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
   const [data, setData] = useState({});
   const [name, setName] = useState("Anonymous");
-  const [startDate, setStartDate] = useState(new Date());
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const [startDate, setStartDate] = useState(tomorrow);
 
   const submitModal = () => {
     let currData = { ...data, senderName: name, validTill: startDate };
