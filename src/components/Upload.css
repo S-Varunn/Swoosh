@@ -12,6 +12,7 @@ body {
 #swoosh {
   height: 400px;
   width: 505px;
+  z-index: 0;
 }
 .container {
   border: 2px dashed;

@@ -3,6 +3,7 @@
   top: calc(48% - (250px / 2));
   left: calc(50% - (140px / 2));
   width: 140px;
+  z-index: 0;
 }
 .minion * {
   position: absolute;
