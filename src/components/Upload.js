@@ -4,9 +4,11 @@ import MyDropzone from "./Dropbox";
 import axios from "axios";
 import { initObject } from "../initVar";
 import copyIcon from "../components/copyToClipboard.svg";
+import Modal from "../components/Modal";
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
   const [link, setLink] = useState({});
   const [active, setActive] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -18,7 +20,8 @@ const Upload = () => {
     console.log(event.target.files[0]);
   };
 
-  const onClickHandler = () => {
+  const onClickHandler = (Modaldata) => {
+    setOpenModal(false);
     const data = new FormData();
     console.log("myformdata", data);
     data.append("file", selectedFile);
@@ -78,11 +81,11 @@ const Upload = () => {
                   className="mybtn"
                   style={{ position: "absolute", right: "35px" }}
                   onClick={(e) => {
-                    onClickHandler();
+                    setOpenModal(true);
                     e.preventDefault();
                   }}
                 >
-                  Submit
+                  Next
                 </button>
               </div>
             ) : (
@@ -123,6 +126,13 @@ const Upload = () => {
             )}
           </form>
         </div>
+        {openModal ? (
+          <Modal
+            closeModal={setOpenModal}
+            modalSubmit={setSubmitted}
+            onClickHandler={onClickHandler}
+          />
+        ) : null}
       </section>
     </>
   );
