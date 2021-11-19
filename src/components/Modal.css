@@ -1,0 +1,101 @@
+.modalBackground {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+}
+.modal-container {
+  height: 350px;
+  width: 542px;
+  background-color: rgb(43, 43, 43);
+  position: absolute;
+  top: 192px;
+  left: 490px;
+  border-radius: 30px;
+}
+.modal-container .cross-button {
+  display: flex;
+  width: 95%;
+  justify-content: flex-end;
+  padding: 10px;
+}
+#close {
+  overflow: hidden;
+  position: relative;
+  border: none;
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: transparent;
+  color: #1da1f2 !important;
+  font: inherit;
+  text-indent: 100%;
+  cursor: pointer;
+}
+#close:focus {
+  outline: solid 0 transparent;
+  box-shadow: 0 0 0 2px #8ed0f9;
+}
+#close:hover {
+  background: rgba(29, 161, 142, 0.1);
+}
+#close:before,
+#close:after {
+  position: absolute;
+  top: 15%;
+  left: calc(50% - 0.0625em);
+  width: 0.125em;
+  height: 70%;
+  border-radius: 0.125em;
+  transform: rotate(45deg);
+  background: currentcolor;
+  content: "";
+}
+#close:after {
+  transform: rotate(-45deg);
+}
+.modal-header {
+  color: rgb(255, 255, 255);
+  font-family: "Caveat", cursive;
+  padding: 10px;
+  font-weight: bolder;
+  font-size: 33px;
+  margin-left: 80px;
+}
+.choose-user {
+  margin-top: 40px;
+  margin-left: 50px;
+  color: rgb(255, 255, 255);
+}
+.input-box {
+  width: 250px;
+  border-radius: 30px;
+  padding: 10px;
+}
+.choose-validtilldate {
+  margin-left: 76px;
+  margin-top: 28px;
+  color: rgb(255, 255, 255);
+  display: flex;
+}
+.submit-modal {
+  position: absolute;
+  top: 40px;
+  left: 220px;
+  width: 110px;
+  background: #434343;
+}
+.submit-modal:hover {
+  background: radial-gradient(#ffdc96, #fd8f00);
+}
+.react-datepicker__input-container input {
+  padding: 10px;
+  width: 185px;
+  border-radius: 30px;
+  margin-left: 31px;
+  text-align: center;
+}
