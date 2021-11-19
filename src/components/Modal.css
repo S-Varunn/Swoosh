@@ -80,6 +80,7 @@
   margin-left: 76px;
   margin-top: 28px;
   color: rgb(255, 255, 255);
+  display: flex;
 }
 .submit-modal {
   position: absolute;
@@ -90,4 +91,11 @@
 }
 .submit-modal:hover {
   background: radial-gradient(#ffdc96, #fd8f00);
+}
+.react-datepicker__input-container input {
+  padding: 10px;
+  width: 185px;
+  border-radius: 30px;
+  margin-left: 31px;
+  text-align: center;
 }

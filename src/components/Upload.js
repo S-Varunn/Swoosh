@@ -20,12 +20,12 @@ const Upload = () => {
     console.log(event.target.files[0]);
   };
 
-  const onClickHandler = (Modaldata) => {
+  const onClickHandler = (modalData) => {
+    console.log(modalData);
     setOpenModal(false);
     const data = new FormData();
     console.log("myformdata", data);
     data.append("file", selectedFile);
-
     axios
       .post("http://localhost:8000/", data, {
         // receive two parameter endpoint url ,form data
