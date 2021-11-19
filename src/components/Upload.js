@@ -27,13 +27,23 @@ const Upload = () => {
     console.log("myformdata", data);
     data.append("file", selectedFile);
     axios
-      .post("http://localhost:8000/", data, {
+      .post(`${initObject.url}/`, data, {
         // receive two parameter endpoint url ,form data
       })
       .then((res) => {
         if (res.status === 200) {
           setSubmitted(true);
         }
+        console.log(res.statusText);
+      });
+    axios
+      .post(`${initObject.url}/userData`, modalData, {
+        // receive two parameter endpoint url ,form data
+      })
+      .then((res) => {
+        // if (res.status === 200) {
+        //   setSubmitted(true);
+        // }
         console.log(res.statusText);
       });
   };
