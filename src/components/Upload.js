@@ -3,7 +3,7 @@ import "./Upload.css";
 import MyDropzone from "./Dropbox";
 import axios from "axios";
 import { initObject } from "../initVar";
-import copyIcon from "../components/copyToClipboard.svg";
+import copyIcon from "./assets/copyToClipboard.svg";
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState(null);

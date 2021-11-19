@@ -16,8 +16,20 @@ body {
   border-radius: 35px;
 }
 .download-page-container .main-card-container .card-header {
-  height: 20%;
+  height: 30%;
   width: 100%;
+  display: flex;
+}
+.card-heading-icon {
+  position: relative;
+  width: 30%;
+  top: 20px;
+  left: 5px;
+}
+.file-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
 }
 .download-page-container .main-card-container .card-header .card-heading {
   font-family: "Caveat", cursive;
@@ -25,6 +37,9 @@ body {
   font-weight: bolder;
   font-size: 33px;
   text-align: unset;
+  width: 70%;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 .card-title {
   text-align: center;
@@ -35,7 +50,7 @@ body {
   font-size: xx-large;
 }
 .download-page-container .main-card-container .card-body {
-  height: 80%;
+  height: 70%;
   width: 100%;
   display: flex;
 }
@@ -45,7 +60,7 @@ body {
   .file-details-container {
   height: 100%;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 15px;
 }
 .download-page-container
   .main-card-container
