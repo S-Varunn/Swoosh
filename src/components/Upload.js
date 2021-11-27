@@ -13,11 +13,13 @@ const Upload = () => {
   const [active, setActive] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [copyMessage, setCopyMessage] = useState("");
+  const [fileSelect, setfileSelect] = useState(false);
 
   const onChangeHandler = (event) => {
     let file = event.target.files[0];
     setSelectedFile(file);
     console.log(event.target.files[0]);
+    setfileSelect(true);
   };
 
   const onClickHandler = (modalData) => {
@@ -78,7 +80,11 @@ const Upload = () => {
           <form action="/" method="post" encType="multipart/form-data">
             {!submitted ? (
               <div className="choose-file">
-                <div className="file-selector">
+                <div
+                  className={`${
+                    fileSelect ? "file-selector" : "file-selector-none"
+                  }`}
+                >
                   <input
                     type="file"
                     name="file"
@@ -87,16 +93,20 @@ const Upload = () => {
                   />
                 </div>
                 <br />
-                <button
-                  className="mybtn"
-                  style={{ position: "absolute", right: "35px" }}
-                  onClick={(e) => {
-                    setOpenModal(true);
-                    e.preventDefault();
-                  }}
-                >
-                  Next
-                </button>
+                {fileSelect ? (
+                  <button
+                    className="mybtn"
+                    style={{ position: "absolute", right: "35px" }}
+                    onClick={(e) => {
+                      setOpenModal(true);
+                      e.preventDefault();
+                    }}
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
             ) : (
               <div style={{ position: "relative" }}>
@@ -129,7 +139,9 @@ const Upload = () => {
                         />
                       </div>
                     </div>
-                    <div className="copyToClip">{copyMessage}</div>
+                    <div className="fadeout">
+                      <div className="copyToClip">{copyMessage}</div>
+                    </div>
                   </div>
                 ) : null}
               </div>
