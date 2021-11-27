@@ -80,7 +80,11 @@ const Upload = () => {
           <form action="/" method="post" encType="multipart/form-data">
             {!submitted ? (
               <div className="choose-file">
-                <div className="file-selector">
+                <div
+                  className={`${
+                    fileSelect ? "file-selector" : "file-selector-none"
+                  }`}
+                >
                   <input
                     type="file"
                     name="file"
