@@ -11,6 +11,7 @@ import jpg from "./assets/jpg.svg";
 import png from "./assets/png.svg";
 import jpeg from "./assets/jpeg.png";
 import svg from "./assets/svg.svg";
+import Countdown from "./Countdown";
 
 const Download = () => {
   const [fileData, setFileData] = useState({});
@@ -22,47 +23,41 @@ const Download = () => {
 
   var baseUrl = window.location.href;
   var id = baseUrl.substring(baseUrl.lastIndexOf("=") + 1);
+  let timeLeftValid;
 
   useEffect(() => {
     try {
       fetchFileDetails();
       fetchFile();
+      sendEncodedFileName(id);
     } catch (e) {
       console.log(e);
     }
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(countDown());
-    }, 1000);
-    return () => clearTimeout(timer);
-  });
+    if ((fileData?.ValidTillDate && timeLeft) || timeLeftValid) countDown();
+  }, [fileData]);
 
-  const countDown = () => {
-    const countDate = new Date(fileData.ValidTillDate).getTime();
+  const sendEncodedFileName = (id) => {
+    const data = { id };
+    Axios.post(`${initObject.url}/encodedFileName`, data).then((res) => {
+      if (res.status === 200) {
+        console.log(res.statusText);
+      }
+    });
+  };
+
+  const countDown = (data) => {
+    const countDate = new Date(data?.ValidTillDate).getTime();
     const currDate = new Date().getTime();
     const gap = countDate - currDate;
-
-    const sec = 1000;
-    const min = sec * 60;
-    const hr = min * 60;
-    const day = hr * 24;
-
-    let timeLeft = {};
-    if (gap > 0) {
-      timeLeft = {
-        day: Math.floor(gap / day),
-        hours: Math.floor((gap % day) / hr),
-        minutes: Math.floor((gap % hr) / min),
-        seconds: Math.floor((gap % min) / sec),
-      };
-    }
-
-    return timeLeft;
+    let timeLeftCalc;
+    timeLeftCalc = gap / (1000 * 60 * 60 * 24);
+    setTimeLeft(timeLeftCalc);
+    timeLeftValid = timeLeftCalc;
+    console.log(timeLeftValid);
   };
-  setInterval(countDown, 1000);
-
   let imgFor;
 
   const fetchFileDetails = async () => {
@@ -74,6 +69,9 @@ const Download = () => {
       imgFor = res.data?.iconFileFormat;
       setImgFormat(res.data?.iconFileFormat);
       fileIconSelect();
+      if (res.data.ValidTillDate) {
+        countDown(res.data);
+      }
     }
   };
   const fetchFile = async () => {
@@ -90,7 +88,10 @@ const Download = () => {
     }
     return str;
   }
-
+  /*  import "../../../../Swoosh-backend/downloadedFiles/93805ee07f6489cd059b3b460466bbbd.jpg"; */
+  const handleDownload = () => {
+    Axios.get(`${initObject.url}/download`);
+  };
   const fileIconSelect = () => {
     switch (imgFor) {
       case "pdf":
@@ -192,9 +193,18 @@ const Download = () => {
         <div className="download-header">
           <p>Your file is ready to download... Kampai!</p>
         </div>
-        <div className="download-avail"></div>
+        <div className="download-avail">
+          <Countdown timeLeft={timeLeft !== 0 ? timeLeft : timeLeftValid} />
+        </div>
         <div className="download-button">
-          <button className="mybtn">Download</button>
+          <button
+            className="mybtn"
+            onClick={() => {
+              handleDownload();
+            }}
+          >
+            Download
+          </button>
         </div>
       </div>
     </div>
