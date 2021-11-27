@@ -64,10 +64,36 @@ input[type="file"]::file-selector-button:hover {
   position: absolute;
   top: 40px;
   left: 175px;
+  font-size: 20px;
+}
+.copy-image {
+  padding: 10px;
+}
+.copy-image:hover {
+  background-color: rgba(0, 0, 0, 0.123);
+  border-radius: 50%;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.fadeout {
+  opacity: 0;
+  -webkit-animation: fadeout 3s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadeout 3s; /* Firefox < 16 */
+  -ms-animation: fadeout 3s; /* Internet Explorer */
+  -o-animation: fadeout 3s; /* Opera < 12.1 */
+  animation: fadeout 3s;
 }
 .copy-icon {
   cursor: pointer;
 }
+
 .file-selector {
   position: absolute;
   left: 35px;
@@ -89,4 +115,5 @@ input[type="file"]::file-selector-button:hover {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding: 10px;
 }
