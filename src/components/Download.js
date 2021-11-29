@@ -11,7 +11,10 @@ import jpg from "./assets/jpg.svg";
 import png from "./assets/png.svg";
 import jpeg from "./assets/jpeg.png";
 import svg from "./assets/svg.svg";
+import mp3 from "./assets/mp3.svg";
+import gif from "./assets/gif.svg";
 import Countdown from "./Countdown";
+import download from "downloadjs";
 
 const Download = () => {
   const [fileData, setFileData] = useState({});
@@ -20,7 +23,7 @@ const Download = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const [imgFormat, setImgFormat] = useState("");
   const [img, setImg] = useState("");
-
+  const [downloadUrl, setDownloadUrl] = useState(null);
   var baseUrl = window.location.href;
   var id = baseUrl.substring(baseUrl.lastIndexOf("=") + 1);
   let timeLeftValid;
@@ -29,7 +32,7 @@ const Download = () => {
     try {
       fetchFileDetails();
       fetchFile();
-      sendEncodedFileName(id);
+      handlePreFetch();
     } catch (e) {
       console.log(e);
     }
@@ -38,15 +41,6 @@ const Download = () => {
   useEffect(() => {
     if ((fileData?.ValidTillDate && timeLeft) || timeLeftValid) countDown();
   }, [fileData]);
-
-  const sendEncodedFileName = (id) => {
-    const data = { id };
-    Axios.post(`${initObject.url}/encodedFileName`, data).then((res) => {
-      if (res.status === 200) {
-        console.log(res.statusText);
-      }
-    });
-  };
 
   const countDown = (data) => {
     const countDate = new Date(data?.ValidTillDate).getTime();
@@ -88,10 +82,46 @@ const Download = () => {
     }
     return str;
   }
-  /*  import "../../../../Swoosh-backend/downloadedFiles/93805ee07f6489cd059b3b460466bbbd.jpg"; */
-  const handleDownload = () => {
-    Axios.get(`${initObject.url}/download`);
+
+  const handlePreFetch = () => {
+    Axios.get(`${initObject.url}/downloads/${id}`);
   };
+  const handleDownload = async () => {
+    /* const result = Axios.get(`${initObject.url}/getFile/${id}`);
+    console.log((await result).data);
+    setDownloadUrl((await result).data); */
+  };
+
+  /* const handleDownload = async () => {
+    try {
+      const result = Axios.get(`${initObject.url}/getFile/${id}`, {
+        responseType: "blob",
+      });
+      const blob = await result.blob();
+      download(blob, id);
+ */ /* return download(result.data, id, "image/jpeg"); comment please */
+  /* } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.log("Error while downloading file. Try again later");
+      }
+    }
+    res.download(path.join(__dirname, `downloadedFiles/${id}`), function (err) {
+      console.log(err);
+    });
+  }; */
+  /*  const handleDownload = async () => {
+    const res = await fetch("http://localhost:3001/download");
+    const blob = await res.blob();
+    download(blob, "test.pdf");
+  }; */
+
+  //the fetch call for "http://localhost:3001/download"  will not hit '/getdoc'
+
+  /*  app.get("/getdoc", function (req, res) {
+    res.download(path.join(__dirname, "files/test.pdf"), function (err) {
+      console.log(err);
+    });
+  }); */
   const fileIconSelect = () => {
     switch (imgFor) {
       case "pdf":
@@ -121,11 +151,22 @@ const Download = () => {
       case "png":
         setImg(png);
         break;
+      case "mp3":
+        setImg(mp3);
+        break;
+      case "gif":
+        setImg(gif);
+        break;
       default:
         setImg(other);
     }
   };
-
+  const converter = (str) => {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  };
   return (
     <div className="download-page">
       <div className="download-page-container">
@@ -170,20 +211,27 @@ const Download = () => {
                     <p>{imgFormat}</p>
                   </div>
                 </div>
-                {fileData.senderName ? (
-                  <div className="file-items">
-                    <div>
-                      <p>
-                        <b>File uploaded by:</b>
-                      </p>
-                    </div>
-                    <div className="additional">
-                      <p>{fileData?.senderName}</p>
-                    </div>
+                <div className="file-items">
+                  <div>
+                    <p>
+                      <b>File Uploaded at:</b>
+                    </p>
                   </div>
-                ) : (
-                  <></>
-                )}
+                  <div className="additional">
+                    <p>{converter(fileData.UploadedDate)}</p>
+                  </div>
+                </div>
+
+                <div className="file-items">
+                  <div>
+                    <p>
+                      <b>File uploaded by:</b>
+                    </p>
+                  </div>
+                  <div className="additional">
+                    <p>{fileData?.senderName}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -205,6 +253,12 @@ const Download = () => {
           >
             Download
           </button>
+          <a
+            href="https://boatfinancialservices.com/CS8591-CN-%20UNIT-II.pdf"
+            download
+          >
+            Click here
+          </a>
         </div>
       </div>
     </div>

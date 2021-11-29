@@ -99,3 +99,6 @@
   margin-left: 31px;
   text-align: center;
 }
+input:focus::placeholder {
+  color: transparent;
+}
