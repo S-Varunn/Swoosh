@@ -45,6 +45,7 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
             <input
               className="input-box"
               type="text"
+              placeholder="Anonymous"
               onChange={(e) => setName(e.target.value)}
             />
           </div>

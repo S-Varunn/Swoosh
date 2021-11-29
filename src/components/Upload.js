@@ -22,6 +22,28 @@ const Upload = () => {
     setfileSelect(true);
   };
 
+  const fileValidation = () => {
+    var fileInput = document.getElementById("file");
+
+    var filePath = fileInput.value;
+
+    // Allowing file type
+    var allowedExtensions =
+      /(\.mp4\.avi\.ogg\.wmv\.flv\.m4v\.dv\.avchd\.mpeg\.qt\.asf\.wma\.m1v|\.mov|\.odt|\.rtf|\.wps|\.wks|\.wpd)$/i;
+
+    if (allowedExtensions.exec(filePath)) {
+      alert("Invalid file type");
+      fileInput.value = "";
+      setOpenModal(false);
+      return;
+    }
+    setOpenModal(true);
+  };
+  const clearFile = () => {
+    var fileInput = document.getElementById("file");
+    fileInput.value = "";
+  };
+
   const onClickHandler = (modalData) => {
     console.log(modalData);
     setOpenModal(false);
@@ -94,16 +116,29 @@ const Upload = () => {
                 </div>
                 <br />
                 {fileSelect ? (
-                  <button
-                    className="mybtn"
-                    style={{ position: "absolute", right: "35px" }}
-                    onClick={(e) => {
-                      setOpenModal(true);
-                      e.preventDefault();
-                    }}
-                  >
-                    Next
-                  </button>
+                  <>
+                    <button
+                      className="mybtn"
+                      style={{ position: "absolute", right: "1px" }}
+                      onClick={(e) => {
+                        fileValidation();
+
+                        e.preventDefault();
+                      }}
+                    >
+                      Next
+                    </button>
+                    <button
+                      className="mybtn"
+                      style={{ position: "absolute", right: "75px" }}
+                      onClick={(e) => {
+                        clearFile();
+                        e.preventDefault();
+                      }}
+                    >
+                      Clear
+                    </button>
+                  </>
                 ) : (
                   <></>
                 )}
