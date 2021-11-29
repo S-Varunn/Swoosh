@@ -1,5 +1,5 @@
 import React from "react";
-import {useDropzone} from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 import "./Dropbox.css";
 document.querySelector("body").addEventListener("mousemove", eyeball);
 function eyeball(event) {
@@ -14,9 +14,9 @@ function eyeball(event) {
 }
 
 function MyDropzone(props) {
-  const {acceptedFiles, getRootProps, getInputProps, isDragActive} =
-    useDropzone();
-  const files = acceptedFiles.map(file => (
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
+    useDropzone({ multiple: false });
+  const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path}-{(file.size / 1000000).toPrecision(2)} MB
     </li>

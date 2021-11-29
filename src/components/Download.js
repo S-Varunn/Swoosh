@@ -194,7 +194,16 @@ const Download = () => {
           <p>Your file is ready to download... Kampai!</p>
         </div>
         <div className="download-avail">
+          <div className="count-down-header">
+            <p className="time-header">Your link valid till :</p>
+          </div>
           <Countdown timeLeft={timeLeft !== 0 ? timeLeft : timeLeftValid} />
+          <div className="count-down-bottom">
+            <p className="time-bottom">Days</p>:
+            <p className="time-bottom">Hrs</p>:
+            <p className="time-bottom">Mins</p>:
+            <p className="time-bottom">Sec</p>
+          </div>
         </div>
         <div className="download-button">
           <button

@@ -19,7 +19,12 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
     modalSubmit(true);
     onClickHandler(currData);
   };
-
+  const setMaxDate = () => {
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(maxDate.getDate() + 4);
+    return maxDate;
+  };
   return (
     <div className="modalBackground">
       <div className="modal-container">
@@ -53,6 +58,8 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
               timeIntervals={60}
               timeCaption="Time"
               dateFormat="MMMM d, yyyy h:mm aa"
+              minDate={startDate}
+              maxDate={setMaxDate()}
             />
           </div>
         </div>
