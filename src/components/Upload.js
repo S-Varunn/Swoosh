@@ -34,6 +34,7 @@ const Upload = () => {
     if (allowedExtensions.exec(filePath)) {
       alert("Invalid file type");
       fileInput.value = "";
+      setfileSelect(false);
       setOpenModal(false);
       return;
     }
@@ -42,6 +43,7 @@ const Upload = () => {
   const clearFile = () => {
     var fileInput = document.getElementById("file");
     fileInput.value = "";
+    setfileSelect(false);
   };
 
   const onClickHandler = (modalData) => {

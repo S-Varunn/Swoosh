@@ -14,7 +14,7 @@ import svg from "./assets/svg.svg";
 import mp3 from "./assets/mp3.svg";
 import gif from "./assets/gif.svg";
 import Countdown from "./Countdown";
-import download from "downloadjs";
+import { saveAs } from "file-saver";
 
 const Download = () => {
   const [fileData, setFileData] = useState({});
@@ -32,7 +32,6 @@ const Download = () => {
     try {
       fetchFileDetails();
       fetchFile();
-      handlePreFetch();
     } catch (e) {
       console.log(e);
     }
@@ -83,45 +82,16 @@ const Download = () => {
     return str;
   }
 
-  const handlePreFetch = () => {
-    Axios.get(`${initObject.url}/downloads/${id}`);
-  };
   const handleDownload = async () => {
-    /* const result = Axios.get(`${initObject.url}/getFile/${id}`);
-    console.log((await result).data);
-    setDownloadUrl((await result).data); */
+    Axios.get(`${initObject.url}/downloaded/${id}`, {
+      responseType: "blob",
+    }).then((response) => {
+      let binaryData = [];
+      binaryData.push(response.data);
+      saveAs(new Blob(binaryData), id);
+    });
   };
 
-  /* const handleDownload = async () => {
-    try {
-      const result = Axios.get(`${initObject.url}/getFile/${id}`, {
-        responseType: "blob",
-      });
-      const blob = await result.blob();
-      download(blob, id);
- */ /* return download(result.data, id, "image/jpeg"); comment please */
-  /* } catch (error) {
-      if (error.response && error.response.status === 400) {
-        console.log("Error while downloading file. Try again later");
-      }
-    }
-    res.download(path.join(__dirname, `downloadedFiles/${id}`), function (err) {
-      console.log(err);
-    });
-  }; */
-  /*  const handleDownload = async () => {
-    const res = await fetch("http://localhost:3001/download");
-    const blob = await res.blob();
-    download(blob, "test.pdf");
-  }; */
-
-  //the fetch call for "http://localhost:3001/download"  will not hit '/getdoc'
-
-  /*  app.get("/getdoc", function (req, res) {
-    res.download(path.join(__dirname, "files/test.pdf"), function (err) {
-      console.log(err);
-    });
-  }); */
   const fileIconSelect = () => {
     switch (imgFor) {
       case "pdf":
