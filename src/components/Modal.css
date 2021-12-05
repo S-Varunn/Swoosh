@@ -6,14 +6,14 @@
   left: 0;
   z-index: 2;
   backdrop-filter: blur(8px);
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 .modal-container {
   height: 350px;
   width: 542px;
   background-color: rgb(43, 43, 43);
-  position: absolute;
-  top: 192px;
-  left: 490px;
   border-radius: 30px;
 }
 .modal-container .cross-button {
