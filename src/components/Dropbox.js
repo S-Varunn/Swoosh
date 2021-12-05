@@ -13,16 +13,32 @@ function eyeball(event) {
   });
 }
 
-function MyDropzone({ setSelectedFile }) {
+function MyDropzone({
+  setfileSelect,
+  setSelectedFile,
+  fileClear,
+  setFileClear,
+}) {
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({ multiple: false });
 
-  if (acceptedFiles.length > 0) setSelectedFile(acceptedFiles[0]);
+  if (acceptedFiles.length > 0) {
+    setSelectedFile(acceptedFiles[0]);
+    setfileSelect(true);
+  }
+  if (fileClear === true) {
+    acceptedFiles.pop();
+    setSelectedFile(null);
+    setfileSelect(false);
+  }
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path}-{(file.size / 1000000).toPrecision(2)} MB
     </li>
   ));
+  if (acceptedFiles.length === 0) {
+    setFileClear(false);
+  }
   return (
     <section>
       <div className="dropbox" {...getRootProps()}>

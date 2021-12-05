@@ -14,6 +14,8 @@ const Upload = () => {
   const [submitted, setSubmitted] = useState(false);
   const [copyMessage, setCopyMessage] = useState("");
   const [fileSelect, setfileSelect] = useState(false);
+  const [fileClear, setFileClear] = useState(false);
+
   const ref = useRef();
 
   const onChangeHandler = (event) => {
@@ -45,8 +47,8 @@ const Upload = () => {
     ref.current.value = "";
     setfileSelect(false);
     setSelectedFile(null);
+    setFileClear(true);
   };
-  console.log(selectedFile);
   const onClickHandler = (modalData) => {
     console.log(modalData);
     setOpenModal(false);
@@ -98,18 +100,19 @@ const Upload = () => {
         <h1>Swoosh</h1>
         <div className="container">
           <React.Fragment>
-            <MyDropzone setSelectedFile={setSelectedFile} />
+            <MyDropzone
+              setSelectedFile={setSelectedFile}
+              fileClear={fileClear}
+              setFileClear={setFileClear}
+              setfileSelect={setfileSelect}
+            />
           </React.Fragment>
         </div>
         <div className="manual">
           <form action="/" method="post" encType="multipart/form-data">
             {!submitted ? (
               <div className="choose-file">
-                <div
-                  className={`${
-                    fileSelect ? "file-selector" : "file-selector-none"
-                  }`}
-                >
+                <div className="file-selector">
                   <input
                     type="file"
                     name="file"
@@ -119,33 +122,27 @@ const Upload = () => {
                   />
                 </div>
                 <br />
-                {fileSelect ? (
-                  <>
-                    <button
-                      className="mybtn"
-                      style={{ position: "absolute", right: "1px" }}
-                      onClick={(e) => {
-                        fileValidation();
-
-                        e.preventDefault();
-                      }}
-                    >
-                      Next
-                    </button>
-                    <button
-                      className="mybtn"
-                      style={{ position: "absolute", right: "75px" }}
-                      onClick={(e) => {
-                        clearFile();
-                        e.preventDefault();
-                      }}
-                    >
-                      Clear
-                    </button>
-                  </>
-                ) : (
-                  <></>
-                )}
+                <button
+                  className={`${fileSelect ? "mybtn" : "mybtn-disabled"}`}
+                  disabled={!fileSelect}
+                  style={{ position: "absolute", right: "1px" }}
+                  onClick={(e) => {
+                    fileValidation();
+                    e.preventDefault();
+                  }}
+                >
+                  Next
+                </button>
+                <button
+                  className="mybtn"
+                  style={{ position: "absolute", right: "75px" }}
+                  onClick={(e) => {
+                    clearFile();
+                    e.preventDefault();
+                  }}
+                >
+                  Clear
+                </button>
               </div>
             ) : (
               <div style={{ position: "relative" }}>
