@@ -13,9 +13,11 @@ function eyeball(event) {
   });
 }
 
-function MyDropzone(props) {
+function MyDropzone({ setSelectedFile }) {
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({ multiple: false });
+
+  if (acceptedFiles.length > 0) setSelectedFile(acceptedFiles[0]);
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path}-{(file.size / 1000000).toPrecision(2)} MB

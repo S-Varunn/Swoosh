@@ -27,6 +27,7 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
   };
   return (
     <div className="modalBackground">
+      <div></div>
       <div className="modal-container">
         <div className="cross-button">
           <button
@@ -70,6 +71,7 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
           </button>
         </div>
       </div>
+      <div></div>
     </div>
   );
 };

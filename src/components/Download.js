@@ -22,8 +22,7 @@ const Download = () => {
   const [dispFileName, setDispFileName] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [imgFormat, setImgFormat] = useState("");
-  const [img, setImg] = useState("");
-  const [downloadUrl, setDownloadUrl] = useState(null);
+  const [img, setImg] = useState(other);
   var baseUrl = window.location.href;
   var id = baseUrl.substring(baseUrl.lastIndexOf("=") + 1);
   let timeLeftValid;
@@ -49,13 +48,11 @@ const Download = () => {
     timeLeftCalc = gap / (1000 * 60 * 60 * 24);
     setTimeLeft(timeLeftCalc);
     timeLeftValid = timeLeftCalc;
-    console.log(timeLeftValid);
   };
   let imgFor;
 
   const fetchFileDetails = async () => {
     const res = await Axios.get(`${initObject.url}/showDetails/myInfo/${id}`);
-    console.log(res);
     if (res.status === 200) {
       setFileData(res.data);
       setDispFileName(start_and_end(res.data?.originalFilename));
@@ -232,12 +229,6 @@ const Download = () => {
           >
             Download
           </button>
-          <a
-            href="https://boatfinancialservices.com/CS8591-CN-%20UNIT-II.pdf"
-            download
-          >
-            Click here
-          </a>
         </div>
       </div>
     </div>

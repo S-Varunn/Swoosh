@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Upload.css";
 import MyDropzone from "./Dropbox";
 import axios from "axios";
@@ -14,6 +14,7 @@ const Upload = () => {
   const [submitted, setSubmitted] = useState(false);
   const [copyMessage, setCopyMessage] = useState("");
   const [fileSelect, setfileSelect] = useState(false);
+  const ref = useRef();
 
   const onChangeHandler = (event) => {
     let file = event.target.files[0];
@@ -41,11 +42,11 @@ const Upload = () => {
     setOpenModal(true);
   };
   const clearFile = () => {
-    var fileInput = document.getElementById("file");
-    fileInput.value = "";
+    ref.current.value = "";
     setfileSelect(false);
+    setSelectedFile(null);
   };
-
+  console.log(selectedFile);
   const onClickHandler = (modalData) => {
     console.log(modalData);
     setOpenModal(false);
@@ -97,7 +98,7 @@ const Upload = () => {
         <h1>Swoosh</h1>
         <div className="container">
           <React.Fragment>
-            <MyDropzone />
+            <MyDropzone setSelectedFile={setSelectedFile} />
           </React.Fragment>
         </div>
         <div className="manual">
@@ -113,6 +114,7 @@ const Upload = () => {
                     type="file"
                     name="file"
                     id="file"
+                    ref={ref}
                     onChange={onChangeHandler}
                   />
                 </div>
