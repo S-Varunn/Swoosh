@@ -15,13 +15,19 @@ function eyeball(event) {
 
 function MyDropzone({
   setfileSelect,
+  selectedFile,
   setSelectedFile,
   fileClear,
   setFileClear,
+  showProps,
 }) {
+  let disabled;
+  if (showProps === false) {
+    disabled = "disabled:true";
+  }
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-    useDropzone({ multiple: false });
-
+    useDropzone({ multiple: false, disabled });
+  let myFile = acceptedFiles.length > 0 ? acceptedFiles[0] : selectedFile;
   if (acceptedFiles.length > 0) {
     setSelectedFile(acceptedFiles[0]);
     setfileSelect(true);
@@ -31,11 +37,14 @@ function MyDropzone({
     setSelectedFile(null);
     setfileSelect(false);
   }
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path}-{(file.size / 1000000).toPrecision(2)} MB
+  const files = myFile ? (
+    <li key={myFile?.path || myFile?.name}>
+      {myFile?.path || myFile?.name}-{(myFile?.size / 1000000).toPrecision(2)}{" "}
+      MB
     </li>
-  ));
+  ) : (
+    <li>No files chosen</li>
+  );
   if (acceptedFiles.length === 0) {
     setFileClear(false);
   }
@@ -46,7 +55,13 @@ function MyDropzone({
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <div>
+            {showProps ? (
+              <p>Drag 'n' drop some files here, or click to select files</p>
+            ) : (
+              <p>Thank you! Have a great day ;)</p>
+            )}
+          </div>
         )}
         <div>
           <div className="minion">
@@ -68,7 +83,7 @@ function MyDropzone({
           </div>
         </div>
       </div>
-      <div className="filename">{files}</div>
+      {showProps ? <div className="filename">{files}</div> : null}
     </section>
   );
 }

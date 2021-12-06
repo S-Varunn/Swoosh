@@ -15,6 +15,7 @@ const Upload = () => {
   const [copyMessage, setCopyMessage] = useState("");
   const [fileSelect, setfileSelect] = useState(false);
   const [fileClear, setFileClear] = useState(false);
+  const [showProps, setShowProps] = useState(true);
 
   const ref = useRef();
 
@@ -26,6 +27,7 @@ const Upload = () => {
   };
 
   const fileValidation = () => {
+    setShowProps(false);
     var fileInput = document.getElementById("file");
 
     var filePath = fileInput.value;
@@ -94,6 +96,11 @@ const Upload = () => {
       .then(() => setCopyMessage("Copied to clipboard"))
       .catch(() => setCopyMessage("Cannot copy text"));
   };
+  if (copyMessage !== "") {
+    setInterval(function () {
+      setCopyMessage("");
+    }, 5000);
+  }
   return (
     <>
       <section id="swoosh">
@@ -102,9 +109,11 @@ const Upload = () => {
           <React.Fragment>
             <MyDropzone
               setSelectedFile={setSelectedFile}
+              selectedFile={selectedFile}
               fileClear={fileClear}
               setFileClear={setFileClear}
               setfileSelect={setfileSelect}
+              showProps={showProps}
             />
           </React.Fragment>
         </div>
@@ -114,12 +123,17 @@ const Upload = () => {
               <div className="choose-file">
                 <div className="file-selector">
                   <input
+                    className="fileInput"
                     type="file"
                     name="file"
                     id="file"
                     ref={ref}
+                    style={{ display: "none" }}
                     onChange={onChangeHandler}
                   />
+                  <label for="file">
+                    <div className="choose-file-button">Choose File</div>
+                  </label>
                 </div>
                 <br />
                 <button
@@ -166,16 +180,11 @@ const Upload = () => {
                       <div>
                         <p className="link-text">{link}</p>
                       </div>
-                      <div className="copy-image">
-                        <img
-                          src={copyIcon}
-                          className="copy-icon"
-                          alt=""
-                          onClick={handleCopy}
-                        />
+                      <div className="copy-image" onClick={handleCopy}>
+                        <img src={copyIcon} className="copy-icon" alt="" />
                       </div>
                     </div>
-                    <div className="fadeout">
+                    <div>
                       <div className="copyToClip">{copyMessage}</div>
                     </div>
                   </div>
@@ -189,6 +198,7 @@ const Upload = () => {
             closeModal={setOpenModal}
             modalSubmit={setSubmitted}
             onClickHandler={onClickHandler}
+            setShowProps={setShowProps}
           />
         ) : null}
       </section>
