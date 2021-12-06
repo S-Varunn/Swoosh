@@ -4,7 +4,7 @@ import "../components/Modal.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
+const Modal = ({ closeModal, modalSubmit, onClickHandler, setShowProps }) => {
   const [data, setData] = useState({});
   const [name, setName] = useState("Anonymous");
   const today = new Date();
@@ -33,6 +33,7 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler }) => {
           <button
             id="close"
             onClick={() => {
+              setShowProps(true);
               closeModal(false);
             }}
           >

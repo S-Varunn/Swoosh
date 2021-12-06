@@ -59,7 +59,7 @@ const Download = () => {
       imgFor = res.data?.iconFileFormat;
       setImgFormat(res.data?.iconFileFormat);
       fileIconSelect();
-      if (res.data.ValidTillDate) {
+      if (res?.data?.ValidTillDate) {
         countDown(res.data);
       }
     }
@@ -73,8 +73,10 @@ const Download = () => {
   };
 
   function start_and_end(str) {
-    if (str.length > 30) {
-      return str.substr(0, 25) + "..." + str.substr(str.length - 8, str.length);
+    if (str?.length > 30) {
+      return (
+        str?.substr(0, 25) + "..." + str?.substr(str?.length - 8, str?.length)
+      );
     }
     return str;
   }
@@ -185,7 +187,7 @@ const Download = () => {
                     </p>
                   </div>
                   <div className="additional">
-                    <p>{converter(fileData.UploadedDate)}</p>
+                    <p>{converter(fileData?.UploadedDate)}</p>
                   </div>
                 </div>
 
