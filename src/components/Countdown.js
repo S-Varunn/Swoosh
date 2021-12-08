@@ -43,7 +43,7 @@ const Countdown = ({ timeLeft }) => {
     };
 
     return () => {
-      counter.timer.stop();
+      counter?.timer?.stop();
     };
   }, [value]);
 
