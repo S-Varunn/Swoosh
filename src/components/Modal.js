@@ -22,7 +22,7 @@ const Modal = ({ closeModal, modalSubmit, onClickHandler, setShowProps }) => {
   const setMaxDate = () => {
     const today = new Date();
     const maxDate = new Date(today);
-    maxDate.setDate(maxDate.getDate() + 4);
+    maxDate.setDate(maxDate.getDate() + 7);
     return maxDate;
   };
   return (

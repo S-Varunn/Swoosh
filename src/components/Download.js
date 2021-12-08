@@ -13,12 +13,12 @@ import jpeg from "./assets/jpeg.png";
 import svg from "./assets/svg.svg";
 import mp3 from "./assets/mp3.svg";
 import gif from "./assets/gif.svg";
-import Countdown from "./Countdown";
-import { saveAs } from "file-saver";
+import DownloadPage from "./DownloadPage";
+import ErrorHandling from "./ErrorHandling";
 
 const Download = () => {
   const [fileData, setFileData] = useState({});
-  const [file, setFile] = useState({});
+  const [response, setResponse] = useState({});
   const [dispFileName, setDispFileName] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
   const [imgFormat, setImgFormat] = useState("");
@@ -30,7 +30,6 @@ const Download = () => {
   useEffect(() => {
     try {
       fetchFileDetails();
-      fetchFile();
     } catch (e) {
       console.log(e);
     }
@@ -52,23 +51,21 @@ const Download = () => {
   let imgFor;
 
   const fetchFileDetails = async () => {
-    const res = await Axios.get(`${initObject.url}/showDetails/myInfo/${id}`);
-    if (res.status === 200) {
-      setFileData(res.data);
-      setDispFileName(start_and_end(res.data?.originalFilename));
-      imgFor = res.data?.iconFileFormat;
-      setImgFormat(res.data?.iconFileFormat);
-      fileIconSelect();
-      if (res?.data?.ValidTillDate) {
-        countDown(res.data);
+    try {
+      const res = await Axios.get(`${initObject.url}/showDetails/myInfo/${id}`);
+      if (res.status === 200) {
+        setFileData(res.data);
+        setResponse(res);
+        setDispFileName(start_and_end(res.data?.originalFilename));
+        imgFor = res.data?.iconFileFormat;
+        setImgFormat(res.data?.iconFileFormat);
+        fileIconSelect();
+        if (res?.data?.ValidTillDate) {
+          countDown(res.data);
+        }
       }
-    }
-  };
-  const fetchFile = async () => {
-    const res = await Axios.get(`${initObject.url}/showDetails/${id}`);
-    console.log(res);
-    if (res.status === 200) {
-      setFile(res.data);
+    } catch (err) {
+      setResponse(err.response);
     }
   };
 
@@ -80,17 +77,6 @@ const Download = () => {
     }
     return str;
   }
-
-  const handleDownload = async () => {
-    Axios.get(`${initObject.url}/downloaded/${id}`, {
-      responseType: "blob",
-    }).then((response) => {
-      let binaryData = [];
-      binaryData.push(response.data);
-      saveAs(new Blob(binaryData), id);
-    });
-  };
-
   const fileIconSelect = () => {
     switch (imgFor) {
       case "pdf":
@@ -130,111 +116,53 @@ const Download = () => {
         setImg(other);
     }
   };
-  const converter = (str) => {
-    var date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
-  };
-  return (
-    <div className="download-page">
-      <div className="download-page-container">
-        <div className="main-card-container">
-          <div className="card-header">
-            <p className="card-heading">Your File Details</p>
-            <div className="card-heading-icon">
-              <img className="file-icon" alt="imageOfFileType" src={img} />
-            </div>
-          </div>
+  if (response?.data?.code === 405) {
+    return (
+      <ErrorHandling
+        message={"Please wait for some time!"}
+        subMessage={"We are looking for your file..."}
+        code={3000}
+      />
+    );
+  } else {
+    if (response.status === 200) {
+      document.body.style.background = "radial-gradient(#ffdc96, #fd8f00)";
 
-          <div className="card-body">
-            <div className="file-details-container">
-              <div className="file-details">
-                <div className="file-items" id="fileName">
-                  <div>
-                    <p>
-                      <b>Filename: </b>
-                    </p>
-                  </div>
-                  <div className="additional">
-                    <p> {dispFileName}</p>
-                  </div>
-                </div>
-                <div className="file-items">
-                  <div>
-                    <p>
-                      <b>Size:</b>
-                    </p>
-                  </div>
-                  <div className="additional">
-                    <p>{fileData?.fileSize}</p>
-                  </div>
-                </div>
-                <div className="file-items">
-                  <div>
-                    <p>
-                      <b>FileType:</b>
-                    </p>
-                  </div>
-                  <div className="additional">
-                    <p>{imgFormat}</p>
-                  </div>
-                </div>
-                <div className="file-items">
-                  <div>
-                    <p>
-                      <b>File Uploaded at:</b>
-                    </p>
-                  </div>
-                  <div className="additional">
-                    <p>{converter(fileData?.UploadedDate)}</p>
-                  </div>
-                </div>
-
-                <div className="file-items">
-                  <div>
-                    <p>
-                      <b>File uploaded by:</b>
-                    </p>
-                  </div>
-                  <div className="additional">
-                    <p>{fileData?.senderName}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      return (
+        <div>
+          <DownloadPage
+            id={id}
+            img={img}
+            dispFileName={dispFileName}
+            fileData={fileData}
+            imgFormat={imgFormat}
+            timeLeft={timeLeft}
+            timeLeftValid={timeLeftValid}
+          />
         </div>
-      </div>
-      <div className="download-area">
-        <div className="download-header">
-          <p>Your file is ready to download... Kampai!</p>
-        </div>
-        <div className="download-avail">
-          <div className="count-down-header">
-            <p className="time-header">Your link valid till :</p>
-          </div>
-          <Countdown timeLeft={timeLeft !== 0 ? timeLeft : timeLeftValid} />
-          <div className="count-down-bottom">
-            <p className="time-bottom">Days</p>:
-            <p className="time-bottom">Hrs</p>:
-            <p className="time-bottom">Mins</p>:
-            <p className="time-bottom">Sec</p>
-          </div>
-        </div>
-        <div className="download-button">
-          <button
-            className="mybtn"
-            onClick={() => {
-              handleDownload();
-            }}
-          >
-            Download
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+      );
+    } else {
+      if (response?.status === 410) {
+        return (
+          <ErrorHandling
+            message={"Your link has expired!"}
+            subMessage={
+              "Please contact the person who has shared the link with you."
+            }
+            code={6000}
+          />
+        );
+      } else {
+        return (
+          <ErrorHandling
+            message={"Please wait for some time!"}
+            subMessage={"We are looking for your file..."}
+            code={3000}
+          />
+        );
+      }
+    }
+  }
 };
 
 export default Download;

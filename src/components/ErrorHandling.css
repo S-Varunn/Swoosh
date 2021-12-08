@@ -1,0 +1,33 @@
+.error-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main-error {
+  min-width: 250px;
+  min-height: auto;
+}
+.main-text {
+  width: 500px;
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+.main-text-warn {
+  width: 500px;
+  position: absolute;
+  top: 10px;
+  left: -5px;
+}
+.sub-text {
+  width: 408px;
+  position: absolute;
+  top: 42px;
+  left: -70px;
+  font-weight: 100;
+  color: aliceblue;
+}
+
+.text-div {
+  position: relative;
+}
