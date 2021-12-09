@@ -85,8 +85,8 @@ body {
 }
 
 .download-area {
-  height: 20vw;
-  width: 39vw;
+  height: 250px;
+  margin-left: 20px;
 }
 .download-area .download-header {
   width: 700px;
