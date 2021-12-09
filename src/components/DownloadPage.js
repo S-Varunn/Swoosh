@@ -3,8 +3,11 @@ import Axios from "axios";
 import { initObject } from "../initVar";
 import { saveAs } from "file-saver";
 import Countdown from "./Countdown";
+import { useState } from "react";
+import "../components/Download.css";
 
 function DownloadPage(props) {
+  const [downMess, setDownMess] = useState(false);
   const {
     id,
     img,
@@ -105,25 +108,32 @@ function DownloadPage(props) {
         </div>
         <div className="download-avail">
           <div className="count-down-header">
-            <p className="time-header">Your link valid till :</p>
+            <p className="time-header">This link valid till : </p>
+            <div>
+              <Countdown timeLeft={timeLeft !== 0 ? timeLeft : timeLeftValid} />
+              <div className="count-down-bottom">
+                <p style={{ marginTop: "10px" }}>Days : Hrs : Mins : Sec</p>
+              </div>
+            </div>
           </div>
-          <Countdown timeLeft={timeLeft !== 0 ? timeLeft : timeLeftValid} />
-          <div className="count-down-bottom">
-            <p className="time-bottom">Days</p>:
-            <p className="time-bottom">Hrs</p>:
-            <p className="time-bottom">Mins</p>:
-            <p className="time-bottom">Sec</p>
+          <div className="download-button">
+            <button
+              className="mybtn"
+              onClick={() => {
+                setDownMess(true);
+                handleDownload();
+              }}
+            >
+              Download
+            </button>
+            {downMess && (
+              <div>
+                <p className="download-message">
+                  Your download will start soon.. Thank you !
+                </p>
+              </div>
+            )}
           </div>
-        </div>
-        <div className="download-button">
-          <button
-            className="mybtn"
-            onClick={() => {
-              handleDownload();
-            }}
-          >
-            Download
-          </button>
         </div>
       </div>
     </div>

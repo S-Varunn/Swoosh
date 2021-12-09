@@ -3,6 +3,11 @@
   flex-direction: column;
   justify-content: center;
 }
+.skull-error {
+  border-radius: 80px;
+  width: 250px;
+  height: 200px;
+}
 .main-error {
   min-width: 250px;
   min-height: auto;

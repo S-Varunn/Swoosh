@@ -9,8 +9,8 @@ body {
   padding: 0;
 }
 .download-page-container .main-card-container {
-  height: 45vh;
-  width: 29vw;
+  height: 340px;
+  width: 430px;
   background-color: #ffd68a;
   box-shadow: 10px 14px 18px 10px rgb(0 0 0 / 20%);
   border-radius: 35px;
@@ -87,12 +87,9 @@ body {
 .download-area {
   height: 20vw;
   width: 39vw;
-  position: relative;
 }
 .download-area .download-header {
-  position: absolute;
-  top: 10px;
-  right: -42px;
+  width: 700px;
 }
 .download-area .download-header p {
   font-size: 40px;
@@ -102,10 +99,6 @@ body {
 .download-area .download-avail {
   height: 300px;
   width: 700px;
-}
-.download-area .download-button {
-  position: absolute;
-  right: 150px;
 }
 .download-button .mybtn {
   background: #0f2027; /* fallback for old browsers */
@@ -121,7 +114,9 @@ body {
     #203a43,
     #0f2027
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  margin-right: 13px;
+  width: 140px;
+  margin-left: 280px;
+  margin-top: 20px;
 }
 .download-button .mybtn:hover {
   background: #0f2027; /* fallback for old browsers */
@@ -138,21 +133,43 @@ body {
     #0f2027
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.count-down-bottom {
-  position: absolute;
-  top: 150px;
-  right: 0px;
-  display: flex;
+.download-message {
+  width: 250px;
+  margin-top: 10px;
+  margin-left: 223px;
 }
-.time-bottom {
-  padding: 0px 28px 0px 28px;
+.count-down-bottom {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+}
+.time-bottom-1 {
+  position: absolute;
+  left: 20px;
+}
+.time-bottom-2 {
+  position: absolute;
+  left: 98px;
+}
+.time-bottom-3 {
+  position: absolute;
+  left: 196px;
+}
+.time-bottom-4 {
+  position: absolute;
+  right: 147px;
 }
 .time-header {
   font-weight: bolder;
   letter-spacing: 0.08rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .count-down-header {
-  position: absolute;
-  top: 93px;
-  left: 110px;
+  display: flex;
+  justify-content: right;
+  margin-top: 23px;
+  margin-right: 55px;
 }
