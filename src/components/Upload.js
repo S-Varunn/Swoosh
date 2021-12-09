@@ -131,7 +131,7 @@ const Upload = () => {
                     style={{ display: "none" }}
                     onChange={onChangeHandler}
                   />
-                  <label for="file">
+                  <label htmlFor="file">
                     <div className="choose-file-button">Choose File</div>
                   </label>
                 </div>

@@ -1,10 +1,12 @@
 import React from "react";
 import error from "../components/assets/error.svg";
+import skullgif from "../components/assets/skull.gif";
 
 import "../components/ErrorHandling.css";
 function ErrorHandling({ message, subMessage, code }) {
   if (code === 3000) {
-    document.body.style.background = "radial-gradient(#ff880096, #ff711c)";
+    document.body.style.background =
+      "radial-gradient(rgb(249 147 30 / 51%), rgb(255 135 64))";
   }
   if (code === 6000)
     document.body.style.background = "radial-gradient(#ff00005c, #ff1c1c)";
@@ -12,7 +14,15 @@ function ErrorHandling({ message, subMessage, code }) {
   return (
     <div>
       <div className="error-image">
-        <img className="main-error" alt="Error" src={error} />
+        {code === 3000 ? (
+          <img
+            className="skull-error"
+            alt="Skull will haunt you"
+            src={skullgif}
+          />
+        ) : (
+          <img className="main-error" alt="Error" src={error} />
+        )}
       </div>
       <div>
         <div className="text-div">

@@ -120,14 +120,13 @@ const Download = () => {
     return (
       <ErrorHandling
         message={"Please wait for some time!"}
-        subMessage={"We are looking for your file..."}
+        subMessage={"We are looking for your file, try refreshing!"}
         code={3000}
       />
     );
   } else {
-    if (response.status === 200) {
+    if (response?.status === 200) {
       document.body.style.background = "radial-gradient(#ffdc96, #fd8f00)";
-
       return (
         <div>
           <DownloadPage
@@ -156,7 +155,7 @@ const Download = () => {
         return (
           <ErrorHandling
             message={"Please wait for some time!"}
-            subMessage={"We are looking for your file..."}
+            subMessage={"We are looking for your file, try refreshing!"}
             code={3000}
           />
         );
