@@ -63,7 +63,7 @@ function MyDropzone({
             )}
           </div>
         )}
-        <div className="minion-container">
+        <div>
           <div className="minion">
             <div className="goggle-strap left"></div>
             <div className="goggle-strap right"></div>
