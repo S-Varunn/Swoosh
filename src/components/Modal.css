@@ -102,3 +102,10 @@
 input:focus::placeholder {
   color: transparent;
 }
+@media (max-width: 500px) {
+  .modalBackground {
+    height: unset;
+    width: unset;
+    padding: 10px;
+  }
+}
