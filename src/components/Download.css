@@ -173,34 +173,3 @@ body {
   margin-top: 23px;
   margin-right: 55px;
 }
-@media (max-width: 500px) {
-  html {
-    height: 100%;
-    padding: 10px;
-  }
-  body {
-    display: unset;
-    height: 100%;
-    margin: 0;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-  }
-  .download-page {
-    display: grid;
-    grid-template-rows: 4fr 2fr;
-  }
-  .download-page-container {
-    position: relative;
-  }
-  .download-page-container .main-card-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  .download-area {
-    margin-left: 0;
-  }
-}
