@@ -149,3 +149,14 @@ p {
 li {
   list-style: none;
 }
+@media (max-width: 500px) {
+  .minion {
+    top: unset;
+    left: unset;
+  }
+  .minion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
